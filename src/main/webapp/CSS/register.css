@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+.title{
+	text-align:center;
+}
+
+
+
+body{
+	
+	background-color:#f4f9ff
+	;
+}
+
+.card{
+	background-color:white;
+	border-radius:20px;
+	width:600px;
+	height:auto;
+	display:flex;
+	justify-content:center;
+	margin:auto;
+	
+	padding:50px 0px;
+	
+}
+.flex{
+	
+	display:flex;
+	gap:50px;
+	
+	
+	
+}
+
+.form button{
+	
+	margin-top:30px;
+	
+	border:none;
+	color:white;
+	background-color:green;
+	border-radius:5px;
+	padding:10px;
+}
