@@ -41,11 +41,8 @@ this.password = password;
 }
     
     public UserModel( String userName, String password) {
-
     	this.userName = userName;
-    	
     	this.password = password;
-
     	}
 
     // Getters and Setters

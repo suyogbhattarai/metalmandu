@@ -25,7 +25,7 @@ public class LoginService {
 	public LoginService() {
 		try {
 			dbConn = DbConnection.getDbConnection();
-		} catch (SQLException | ClassNotFoundException ex) {
+		} catch (SQLException ex) {
 			ex.printStackTrace();
 			isConnectionError = true;
 		}
@@ -44,7 +44,7 @@ public class LoginService {
 			return null;
 		}
 
-		String query = "SELECT user_name, password,is_admin FROM user WHERE user_name = ?";
+		String query = "SELECT user_name, password,is_admin,email,first_name,last_name,address,phone_number FROM user WHERE user_name = ?";
 		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
 			stmt.setString(1, UserModel.getUserName());
 			ResultSet result = stmt.executeQuery();
@@ -65,6 +65,49 @@ public class LoginService {
 		return false;
 	}
 	
+	
+	public UserModel getAuthenticatedUserDetails(UserModel userModel) {
+	    if (isConnectionError) {
+	        System.out.println("Connection Error!");
+	        return null;
+	    }
+
+	    String query = "SELECT id,user_name, password, is_admin, email, first_name, last_name, address, phone_number FROM user WHERE user_name = ?";
+	    
+	    try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+	        stmt.setString(1, userModel.getUserName());
+	        ResultSet result = stmt.executeQuery();
+
+	        if (result.next()) {
+	            // Validate password first
+	            if (validatePassword(result, userModel)) {
+	                // Populate user details
+	                UserModel fullUser = new UserModel();
+	                fullUser.setId(result.getInt("id"));
+	                fullUser.setUserName(result.getString("user_name"));
+	                fullUser.setPassword(result.getString("password"));
+	                fullUser.setAdmin(result.getBoolean("is_admin"));
+	                fullUser.setEmail(result.getString("email"));
+	                fullUser.setFirstName(result.getString("first_name"));
+	                fullUser.setLastName(result.getString("last_name"));
+	                fullUser.setAddress(result.getString("address"));
+	                fullUser.setPhoneNumber(result.getString("phone_number"));
+
+	                return fullUser;
+	            } else {
+	                System.out.println("Invalid password for user: " + userModel.getUserName());
+	            }
+	        } else {
+	            System.out.println("User not found: " + userModel.getUserName());
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        System.out.println("SQL Exception: " + e.getMessage());
+	    }
+
+	    return null;
+	}
+	
 	public Boolean adminStatus(UserModel UserModel) {
 		if (isConnectionError) {
 			System.out.println("Connection Error!");
@@ -80,8 +123,10 @@ public class LoginService {
 
 			if (result.next()) {
 				System.out.println("result data"+result.getBoolean("is_admin"));
-				
-				return result.getBoolean("is_admin");
+				 if (validatePassword(result, UserModel)) {
+						return result.getBoolean("is_admin");
+				 }
+		
 				
 			}
 		} catch (SQLException e) {
@@ -107,7 +152,7 @@ public class LoginService {
 		String dbPassword = result.getString("password");
 		System.out.println(dbUsername);
 		System.out.println(dbPassword);
-
+		System.out.println(PasswordUtil.decrypt(dbPassword, dbUsername));
 
 		return dbUsername.equals(UserModel.getUserName())
 				&& PasswordUtil.decrypt(dbPassword, dbUsername).equals(UserModel.getPassword());

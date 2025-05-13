@@ -23,7 +23,7 @@ public class RegisterService {
 	public RegisterService() {
 		try {
 			this.dbConn = DbConnection.getDbConnection();
-		} catch (SQLException | ClassNotFoundException ex) {
+		} catch (SQLException ex) {
 			System.err.println("Database connection error: " + ex.getMessage());
 			ex.printStackTrace();
 		}

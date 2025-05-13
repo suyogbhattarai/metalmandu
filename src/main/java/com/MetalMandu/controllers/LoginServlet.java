@@ -54,30 +54,33 @@ public class LoginServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = req.getParameter("usernamelogin");
-		String password = req.getParameter("passwordlogin");
+	    String username = req.getParameter("usernamelogin");
+	    String password = req.getParameter("passwordlogin");
 
-		UserModel UserModel = new UserModel(username, password);
-		System.out.println("given model"+ UserModel.getUserName());
-		Boolean loginStatus = loginService.loginUser(UserModel);
-		System.out.println("Login Status" + loginStatus);
+	    UserModel loginAttempt = new UserModel(username, password);
+	    System.out.println("Attempting login for: " + loginAttempt.getUserName());
 
-		Boolean adminStatus=loginService.adminStatus(UserModel);
-		
+	    // Get full user details if credentials are valid
+	    UserModel authenticatedUser = loginService.getAuthenticatedUserDetails(loginAttempt);
 
-		if (loginStatus != null && loginStatus) {
-			SessionUtil.setAttribute(req, "username", username);
-			if (loginStatus != null && adminStatus) {
-				CookieUtil.addCookie(resp, "role", "admin", 5 * 30);
-				resp.sendRedirect(req.getContextPath() + "/dashboard"); // Redirect to /home
-			} else {
-				CookieUtil.addCookie(resp, "role", "user", 5 * 30);
-				resp.sendRedirect(req.getContextPath() + "/home"); // Redirect to /home
-			}
-		} else {
-			handleLoginFailure(req, resp, loginStatus);
-		}
+	    if (authenticatedUser != null) {
+	        // Set user details and username in session
+	        SessionUtil.setAttribute(req, "userDetails", authenticatedUser);
+	        SessionUtil.setAttribute(req, "username", authenticatedUser.getUserName());
+
+	        // Set role cookie and redirect
+	        if (authenticatedUser.isAdmin()) {
+	            CookieUtil.addCookie(resp, "role", "admin", 5 * 30);
+	            resp.sendRedirect(req.getContextPath() + "/dashboard");
+	        } else {
+	            CookieUtil.addCookie(resp, "role", "user", 5 * 30);
+	            resp.sendRedirect(req.getContextPath() + "/home");
+	        }
+	    } else {
+	        handleLoginFailure(req, resp, false);  // false indicates invalid credentials
+	    }
 	}
+
 
 	/**
 	 * Handles login failures by setting attributes and forwarding to the login

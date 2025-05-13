@@ -25,16 +25,13 @@ public class AuthenticationFilter implements Filter {
 	private static final String HOME = "/home";
 	private static final String ROOT = "/";
 	private static final String DASHBOARD = "/dashboard";
-	private static final String MODIFY_STUDENTS = "/modifyStudents";
-	private static final String STUDENT_UPDATE = "/studentUpdate";
-	private static final String ADMIN_ORDER = "/adminOrder";
-	private static final String ABOUT = "/about";
-	private static final String PORTFOLIO = "/portfolio";
-	private static final String CONTACT = "/contact";
-	private static final String ORDER_LIST = "/orderlist";
-	private static final String LOGOUT = "/logout";
-	private static final String CART_LIST = "/cartlist";
+	private static final String CHANGEPASSWORD = "/changepassword";
 
+	
+
+	private static final String LOGOUT = "/logout";
+
+	private static final String PROFILE = "/profile";
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// Initialization logic, if required
@@ -69,7 +66,16 @@ public class AuthenticationFilter implements Filter {
 			if (uri.endsWith(LOGOUT) ) {
 				chain.doFilter(request, response);
 				
-			}else if (uri.endsWith(DASHBOARD) ) {
+			}
+			else if (uri.endsWith(PROFILE) ) {
+				chain.doFilter(request, response);
+				
+			}
+			else if (uri.endsWith(CHANGEPASSWORD) ) {
+				chain.doFilter(request, response);
+				
+			}
+			else if (uri.endsWith(DASHBOARD) ) {
 				chain.doFilter(request, response);
 			}  else {
 				res.sendRedirect(req.getContextPath() + DASHBOARD);
@@ -80,6 +86,14 @@ public class AuthenticationFilter implements Filter {
 				res.sendRedirect(req.getContextPath() + HOME);
 			}
 			else if (uri.endsWith(LOGOUT) ) {
+				chain.doFilter(request, response);
+				
+			}
+			else if (uri.endsWith(PROFILE) ) {
+				chain.doFilter(request, response);
+				
+			}
+			else if (uri.endsWith(CHANGEPASSWORD) ) {
 				chain.doFilter(request, response);
 				
 			}
@@ -102,6 +116,14 @@ public class AuthenticationFilter implements Filter {
 			
 			else if (uri.endsWith(LOGOUT) ) {
 				chain.doFilter(request, response);
+			}
+			else if (uri.endsWith(CHANGEPASSWORD) ) {
+				res.sendRedirect(req.getContextPath() + LOGIN);
+				
+			}
+			
+			else if (uri.endsWith(PROFILE) ) {
+				res.sendRedirect(req.getContextPath() + LOGIN);
 			}
 			
 	

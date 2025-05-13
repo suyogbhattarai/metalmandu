@@ -1,3 +1,7 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.MetalMandu.models.CategoryModel" %>
+<%@ page import="com.MetalMandu.models.ProductModel" %>
+<%@ page import="com.MetalMandu.models.UserModel" %>
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -62,7 +66,7 @@
                                 <div class="nav__dropdown-collapse">
                                     <div class="nav__dropdown-content">
                                         <a href="#" class="nav__dropdown-item">Passwords</a>
-                                        <a href="#" class="nav__dropdown-item">Mail</a>
+                                    
                                         <a href="#" class="nav__dropdown-item">Accounts</a>
                                     </div>
                                 </div>
@@ -79,30 +83,24 @@
     
                             <div class="nav__dropdown">
                                 <a href="#" class="nav__link">
-                                    <i class='bx bx-bell nav__icon' ></i>
-                                    <span class="nav__name">Notifications</span>
+                                   <i style="margin-right:6px;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    <span class="nav__name">Manage</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
                                 </a>
 
                                 <div class="nav__dropdown-collapse">
                                     <div class="nav__dropdown-content">
-                                        <a href="#" class="nav__dropdown-item">Blocked</a>
-                                        <a href="#" class="nav__dropdown-item">Silenced</a>
-                                        <a href="#" class="nav__dropdown-item">Publish</a>
-                                        <a href="#" class="nav__dropdown-item">Program</a>
+                                        <a href="#" class="nav__dropdown-item">Products</a>
+                                        <a href="#" class="nav__dropdown-item">Categories</a>
+                                        <a href="#" class="nav__dropdown-item">Brand</a>
+                                        <a href="#" class="nav__dropdown-item">Users</a>
                                     </div>
                                 </div>
 
                             </div>
 
-                            <a href="#" class="nav__link">
-                                <i class='bx bx-compass nav__icon' ></i>
-                                <span class="nav__name">Explore</span>
-                            </a>
-                            <a href="#" class="nav__link">
-                                <i class='bx bx-bookmark nav__icon' ></i>
-                                <span class="nav__name">Saved</span>
-                            </a>
+                       
+                       
                         </div>
                     </div>
                 </div>
@@ -131,7 +129,20 @@
           <div class="cards">
             <div class="card-single">
               <div>
-                <h1>50</h1>
+                 <%
+          // Use allUsers instead of users to avoid duplicate variable
+          int customerCount = 0;
+          if (request.getAttribute("users") != null) {
+            List<UserModel> allUsers = (List<UserModel>) request.getAttribute("users");
+            for (UserModel user : allUsers) {
+              if (user != null && !user.isAdmin()) {
+                customerCount++;
+              }
+            }
+          }
+        %>
+        <h1> <%= customerCount %></h1>
+       
                 <span>Customers</span>
               </div>
               <div>
@@ -140,8 +151,18 @@
             </div>
             <div class="card-single">
               <div>
-                <h1>12</h1>
-                <span>Projects</span>
+   <h1>
+        <%
+          // Use totalCategories instead of categoryCount to avoid duplicate variable
+          int totalCategories = 0;
+          if (request.getAttribute("categories") != null) {
+            List<CategoryModel> allCategories = (List<CategoryModel>) request.getAttribute("categories");
+            totalCategories = allCategories.size();
+          }
+        %>
+        <%= totalCategories %>
+      </h1>
+                <span>Categories</span>
               </div>
               <div>
                 <i class="fa fa-list-alt" aria-hidden="true"></i>
@@ -149,8 +170,8 @@
             </div>
             <div class="card-single">
               <div>
-                <h1>15</h1>
-                <span>Orders</span>
+                <h1>7</h1>
+                <span>Brands</span>
               </div>
               <div>
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -158,8 +179,17 @@
             </div>
             <div class="card-single">
               <div>
-                <h1>$50K</h1>
-                <span>Income</span>
+                <h1>
+        <%
+          int totalProducts = 0;
+          if (request.getAttribute("products") != null) {
+            List<ProductModel> allProducts = (List<ProductModel>) request.getAttribute("products");
+            totalProducts = allProducts.size();
+          }
+        %>
+        <%= totalProducts %>
+      </h1>
+                <span>Products</span>
               </div>
               <div>
                 <i class="fa fa-credit-card" aria-hidden="true"></i>
@@ -172,7 +202,7 @@
             <div class="projects">
               <div class="card">
                 <div class="card-header">
-                  <h2>Recent Projects</h2>
+                  <h2>Products</h2>
                   <button>See all <i class="fa fa-arrow-right" style="margin-left:5px" aria-hidden="true"></i>
                   </button>
                 </div>
@@ -182,37 +212,35 @@
                   
                         <thead>
                           <tr>
-                            <th scope="col">Account</th>
-                            <th scope="col">Due Date</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Period</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Material</th>
                           </tr>
                         </thead>
                         <tbody>
+                          <%
+                          List<ProductModel> products = (List<ProductModel>) request.getAttribute("products");
+
+                          if ( products != null) {
+                int productCount = 0;
+                    for (ProductModel product : products) {
+          
+                        	if (productCount >= 7) break; // Only show 7 products per category
+                            productCount++;
+                %>
                           <tr>
-                            <td data-label="Account">Visa - 3412</td>
-                            <td data-label="Due Date">04/01/2016</td>
-                            <td data-label="Amount">$1,190</td>
-                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
+                            <td data-label="Account"><%= product.getName() %></td>
+                            <td data-label="Due Date"><%= product.getPrice() %></td>
+                            <td data-label="Amount"><%= product.getStockQuantity() %></td>
+                            <td data-label="Period"><%= product.getMaterial() %></td>
                           </tr>
-                          <tr>
-                            <td scope="row" data-label="Account">Visa - 6076</td>
-                            <td data-label="Due Date">03/01/2016</td>
-                            <td data-label="Amount">$2,443</td>
-                            <td data-label="Period">02/01/2016 - 02/29/2016</td>
-                          </tr>
-                          <tr>
-                            <td scope="row" data-label="Account">Corporate AMEX</td>
-                            <td data-label="Due Date">03/01/2016</td>
-                            <td data-label="Amount">$1,181</td>
-                            <td data-label="Period">02/01/2016 - 02/29/2016</td>
-                          </tr>
-                          <tr>
-                            <td scope="row" data-label="Acount">Visa - 3412</td>
-                            <td data-label="Due Date">02/01/2016</td>
-                            <td data-label="Amount">$842</td>
-                            <td data-label="Period">01/01/2016 - 01/31/2016</td>
-                          </tr>
+                          
+                             <%
+                    }
+                    }
+                %>
+                         
                         </tbody>
                       </table>
                   </div>
@@ -224,70 +252,52 @@
             <div class="customers">
               <div class="card">
                 <div class="card-header">
-                    <h2>New Customers</h2>
+                    <h2>Customers</h2>
                     <button>See all <i class="fa fa-arrow-right" style="margin-left:5px" aria-hidden="true"></i>
                     </button>
                 </div>
                 <div class="card-body">
+                  <%
+                          List<UserModel> users = (List<UserModel>) request.getAttribute("users");
+
+                          if ( users != null) {
+                int userCount = 0;
+                    for (UserModel user : users) {
+                    	 if (!user.isAdmin() ) {
+                        	if (userCount >= 9) break; // Only show 7 products per category
+                            userCount++;
+                %>
                   <div class="customer">
                     <div class="info">
-                      <img src="https://bit.ly/3bvT89p" height="40px" width="40px" alt="customer">
+                     
+                       <img  src="${pageContext.request.contextPath}/assets/user.png" height="40px" width="40px" alt="customer" />
                       <div>
-                        <h4>Malik Abushabab</h4>
-                        <small>CEO</small>
+                        <h4><%
+    String firstName = user.getFirstName();
+    String lastName = user.getLastName();
+    if (firstName != null && lastName != null) {
+  %>
+    <%= firstName %> <%= lastName %>
+  <%
+    } else {
+  %>
+    <%= user.getUserName() %>
+  <%
+    }
+  %></h4>
+                        <small><%= user.getEmail() %></small>
                       </div>
                     </div>
                     <div class="contact">
-                        <span class="fas fa-user-circle"></span>
-                        <span class="fas fa-comment"></span>
-                        <span class="fas fa-phone-alt"></span>
-                      </div>
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+
+	                      </div>
                   </div>
-             
-            
-                  <div class="customer">
-                    <div class="info">
-                      <img src="https://bit.ly/3bvT89p" height="40px" width="40px" alt="customer">
-                      <div>
-                        <h4>Malik Abushabab</h4>
-                        <small>CEO</small>
-                      </div>
-                    </div>
-                    <div class="contact">
-                        <span class="fas fa-user-circle"></span>
-                        <span class="fas fa-comment"></span>
-                        <span class="fas fa-phone-alt"></span>
-                      </div>
-                  </div>
-                  <div class="customer">
-                    <div class="info">
-                      <img src="https://bit.ly/3bvT89p" height="40px" width="40px" alt="customer">
-                      <div>
-                        <h4>Malik Abushabab</h4>
-                        <small>CEO</small>
-                      </div>
-                    </div>
-                    <div class="contact">
-                        <span class="fas fa-user-circle"></span>
-                        <span class="fas fa-comment"></span>
-                        <span class="fas fa-phone-alt"></span>
-                      </div>
-                  </div>
-                  <div class="customer">
-                    <div class="info">
-                      <img src="https://bit.ly/3bvT89p" height="40px" width="40px" alt="customer">
-                      <div>
-                        <h4>Malik Abushabab</h4>
-                        <small>CEO</small>
-                      </div>
-                    </div>
-                    <div class="contact">
-                        <span class="fas fa-user-circle"></span>
-                        <span class="fas fa-comment"></span>
-                        <span class="fas fa-phone-alt"></span>
-                      </div>
-                  </div>
-                </div>
+                              <%
+                    }
+                    }
+                    }
+                %>
               </div>
   
             </div>
@@ -297,7 +307,7 @@
           <div class="projects">
             <div class="card">
               <div class="card-header">
-                <h2>Recent Projects</h2>
+                <h2>Category</h2>
                 <button>See all <i class="fa fa-arrow-right" style="margin-left:5px" aria-hidden="true"></i>
  </button>
               </div>
@@ -307,37 +317,32 @@
                 
                       <thead>
                         <tr>
-                          <th scope="col">Account</th>
-                          <th scope="col">Due Date</th>
-                          <th scope="col">Amount</th>
-                          <th scope="col">Period</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Description</th>
+                      
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td data-label="Account">Visa - 3412</td>
-                          <td data-label="Due Date">04/01/2016</td>
-                          <td data-label="Amount">$1,190</td>
-                          <td data-label="Period">03/01/2016 - 03/31/2016</td>
-                        </tr>
-                        <tr>
-                          <td scope="row" data-label="Account">Visa - 6076</td>
-                          <td data-label="Due Date">03/01/2016</td>
-                          <td data-label="Amount">$2,443</td>
-                          <td data-label="Period">02/01/2016 - 02/29/2016</td>
-                        </tr>
-                        <tr>
-                          <td scope="row" data-label="Account">Corporate AMEX</td>
-                          <td data-label="Due Date">03/01/2016</td>
-                          <td data-label="Amount">$1,181</td>
-                          <td data-label="Period">02/01/2016 - 02/29/2016</td>
-                        </tr>
-                        <tr>
-                          <td scope="row" data-label="Acount">Visa - 3412</td>
-                          <td data-label="Due Date">02/01/2016</td>
-                          <td data-label="Amount">$842</td>
-                          <td data-label="Period">01/01/2016 - 01/31/2016</td>
-                        </tr>
+                       <%
+                          List<CategoryModel> categories = (List<CategoryModel>) request.getAttribute("categories");
+
+                          if ( products != null) {
+                int categoryCount = 0;
+                    for (CategoryModel category : categories) {
+          
+                        	if (categoryCount >= 7) break; // Only show 7 products per category
+                            categoryCount++;
+                %>
+                          <tr>
+                            <td data-label="Account"><%= category.getName() %></td>
+                            <td data-label="Due Date"><%= category.getDescription() %></td>
+                 
+                          </tr>
+                          
+                             <%
+                    }
+                    }
+                %>
                       </tbody>
                     </table>
                 </div>
