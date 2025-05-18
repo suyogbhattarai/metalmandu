@@ -1,0 +1,266 @@
+@charset "UTF-8";
+
+:root {
+    --font-main: "Montserrat", sans-serif;
+    --font-secondary: "Poppins", sans-serif;
+    --colo-primary: #2D336B;
+    --colo-dark-1: #696565;
+    --colo-dark-2: #7d8184;
+    --colo-white-1: #ffffff;
+    --colo-cream:#f6f4f0;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-secondary);
+    font-size: 1.6rem;
+    background-color: #f6f4f0;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::-webkit-scrollbar{
+    display: none;
+}
+
+.container {
+    width: 87vw;
+    margin: auto;
+}
+
+::before,
+::after {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    font-size: 10px;
+    scroll-behavior: smooth;
+    /* 1 rem =10px  */
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+p {
+    padding: 0px;
+    margin: 0px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.product-container {
+    margin: 40px 0px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.product-container .product-image {
+    flex: 1;
+    min-width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.product-details {
+    flex: 1;
+    min-width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.product-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.rating {
+    color: #ffc107;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.reviews {
+    color: #333;
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+.stock {
+    color: #333;
+    font-size: 16px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.divider {
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.colors {
+    margin-bottom: 20px;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.quantity-selector label {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.quantity-selector input {
+    width: 60px;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    background-color: #002855;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #001c3d;
+}
+
+.btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.delivery-method {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.delivery-method input {
+    margin-right: 10px;
+}
+
+.success-message {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 4px;
+    z-index: 2000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+    .product-container {
+        flex-direction: column;
+    }
+    
+    .product-image, .product-details {
+        min-width: 100%;
+    }
+    
+    .product-title {
+        font-size: 24px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+}

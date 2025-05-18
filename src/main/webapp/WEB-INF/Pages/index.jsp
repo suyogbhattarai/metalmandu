@@ -2,7 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.MetalMandu.models.CategoryModel" %>
 <%@ page import="com.MetalMandu.models.ProductModel" %>
-
+<%@ page import="com.MetalMandu.models.BrandModel" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -43,7 +43,7 @@
                             productCount++;
                 %>
                     <li class="mega-item-has-children-2">
-                        <a class="scroll-down"><%= product.getName() %> <span>></span></a>
+                        <a class="scroll-down"  href="${pageContext.request.contextPath}/buy/?id=<%= product.getId() %>"><%= product.getName() %> <span>></span></a>
                         <div class="mega-sub-menu-2 mega-multi-column">
                             <div class="product-image">
                                 <img src="<%= request.getContextPath() %>/assets/metalmandu3/product/<%= product.getImage() %>" alt="">
@@ -52,6 +52,10 @@
                                 <h2 style="color: #2D336B;"><%= product.getName() %></h2>
                                 <p><span style="color: #2D336B;">Price:</span> Rs.<%= product.getPrice() %></p>
                                 <p><span style="color: #2D336B;">Description:</span> <%= product.getDescription() %></p>
+                                <div class="buy-btn">
+
+                                </div>
+               
                             </div>
                         </div>
                     </li>
@@ -94,134 +98,18 @@
             </div>
 
         </section>
-        <!-- <section class="todays-section">
-
-            <h1 class="title">This month</h1>
-            <div id="type">
-                <p class="topic" >Best Selling Products</p>
-                <a class="btn scroll-down " >View All</a>
-            </div>
-
-
-
-
-
-            <div class="products-row">
-                <div class="product-box">
-                    <img src="${pageContext.request.contextPath}/assets/printer3.png" alt="">
-                    <p class="product-title" style="margin: 10px 0px;font-size: 20px;font-weight: 500;">HP OfficeJet Pro
-                        9015</p>
-                    <p style="margin: 15px 0px;font-size: 17px;font-weight: 500;display: flex;align-items: center;">
-                        <span style="font-weight: 350;;color: #2D336B;font-size: 20px;">Rs:70000</span><span
-                            style="font-weight: 350;font-size: 15px;text-decoration: line-through;margin-left: 5px; color: black;">Rs:80000</span>
-                    </p>
-                    <div style="margin: 15px 0px;" class="rating">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-
-                    </div>
-                    <div class="icons">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="off">
-                        5%off
-                    </div>
-                    <a href="./productDetail.html" class="buy-btn">
-                        <span style="display: flex;justify-content: center;">Buy Now</span>
-                    </a>
-                </div>
-                <div class="product-box">
-                    <img src="${pageContext.request.contextPath}/assets/printer7.png" alt="">
-                    <p class="product-title" style="margin: 10px 0px;font-size: 20px;font-weight: 500;">Epson EcoTank
-                        ET-4760</p>
-                    <p style="margin: 15px 0px;font-size: 17px;font-weight: 500;display: flex;align-items: center;">
-                        <span style="font-weight: 350;;color:#2D336B;font-size: 20px;">Rs:40000</span><span
-                            style="font-weight: 350;font-size: 15px;text-decoration: line-through;margin-left: 5px; color: black;">Rs.50000</span>
-                    </p>
-                    <div style="margin: 15px 0px;" class="rating">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-
-                    </div>
-                    <div class="icons">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="off">
-                        10%off
-                    </div>
-                    <a href="./productDetail.html" class="buy-btn">
-                        <span style="display: flex;justify-content: center;">Buy Now</span>
-                    </a>
-                </div>
-                <div class="product-box">
-                    <img src="${pageContext.request.contextPath}/assets/priter4.jpg" alt="">
-                    <p class="product-title" style="margin: 10px 0px;font-size: 20px;font-weight: 500;">
-                        Canon PIXMA series</p>
-                    <p style="margin: 15px 0px;font-size: 17px;font-weight: 500;display: flex;align-items: center;">
-                        <span style="font-weight: 350;;color:#2D336B;font-size: 20px;">Rs:30000</span><span
-                            style="font-weight: 350;font-size: 15px;text-decoration: line-through;margin-left: 5px; color: black;">Rs:40000</span>
-                    </p>
-                    <div style="margin: 15px 0px;" class="rating">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        
-
-                    </div>
-                    <div class="icons">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="off">
-                        20%off
-                    </div>
-                    <a href="./productDetail.html" class="buy-btn">
-                        <span style="display: flex;justify-content: center;">Buy Now</span>
-                    </a>
-                </div>
-                <div class="product-box">
-                    <img src="${pageContext.request.contextPath}/assets/printer3.png" alt="">
-                    <p class="product-title" style="margin: 10px 0px;font-size: 20px;font-weight: 500;">HP OfficeJet Pro
-                        9015</p>
-                    <p style="margin: 15px 0px;font-size: 17px;font-weight: 500;display: flex;align-items: center;">
-                        <span style="font-weight: 350;;color: #2D336B;font-size: 20px;">Rs:10000</span><span
-                            style="font-weight: 350;font-size: 15px;text-decoration: line-through;margin-left: 5px; color: black;">Rs:120000</span>
-                    </p>
-                    <div style="margin: 15px 0px;" class="rating">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-
-                    </div>
-                    <div class="icons">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="off">
-                        5%off
-                    </div>
-                    <a href="./productDetail.html" class="buy-btn">
-                        <span style="display: flex;justify-content: center;">Buy Now</span>
-                    </a>
-                </div>
-            </div>
-        </section> -->
+      
     	<header class=".product-slide-header">
             <section class="todays-section">
                 <h1 class="title">This month</h1>
                 <div id="type">
-                    <p class="topic" >Best Selling Products</p>
+                    <p class="topic" >Best Selling Chairs</p>
                     <div class="controls">
                         <p>
                            
 
                         </p>
-                        <a class="btn scroll-down " >View All</a>
+                       <%--<a class="btn scroll-down " >View All</a> --%> 
                     </div>
                   
                  
@@ -234,368 +122,26 @@
 		<section class="products-slider">
             <span class="left">&#10094;</span>
             <span class="right">&#10095;</span>
-			<!-- <div class="product">
-
-				<picture>
-					<img src="image/banner2.png" alt="">
-				</picture>
-				<p class="product-title" style="margin: 10px 0px;font-size: 20px;font-weight: 500;">HP OfficeJet Pro
-                    9015</p>
-                <p style="margin: 15px 0px;font-size: 17px;font-weight: 500;display: flex;align-items: center;">
-                    <span style="font-weight: 350;;color: #2D336B;font-size: 20px;">Rs:10000</span><span
-                        style="font-weight: 350;font-size: 15px;text-decoration: line-through;margin-left: 5px; color: black;">Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    5%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-			</div>
-			<div class="product">
-				<picture>
-					<img src="image/banner1.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Two</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div>
-			<div class="product">
-				<picture>
-					<img src="image/banner3.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Three</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div>
-			<div class="product">
-				<picture>
-					<img src="image/banner4.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Four</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div>
-			<div class="product">
-				<picture>
-					<img src="image/watch.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Five</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div>
-			<div class="product">
-				<picture>
-					<img src="image/delta.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Six</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div>
-			<div class="product">
-				<picture>
-					<img src="image/image3.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Seven</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div>
-			<div class="product">
-				<picture>
-					<img src="image/image2.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Eight</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div>
-			<div class="product">
-				<picture>
-					<img src="image/nokia.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Nine</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div>
-			<div class="product">
-				<picture>
-					<img src="image/nokia-air.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Ten</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div>
-			<div class="product">
-				<picture>
-					<img src="image/feature_3.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Eleven</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div>
-			<div class="product">   
-				<picture>
-					<img src="image/one.png" alt="">
-				</picture>
-				<div class="detail">
-					<p>
-						<b>Product Twelve</b><br>
-						<small>New arrival</small>
-					</p>
-					<samp>$45.00</samp>
-				</div>
-				<div class="button">
-					<p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-					<a href="#">Add-cart</a>
-				</div>
-			</div> -->
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product1" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    5%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product2" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    10%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product3.jpg" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+			 <%
+   
+                          if ( products != null) {
+                int productCount = 1;
+                    for (ProductModel product : products) {
+                    	 if (product.getCategoryID() ==2 ) {
                     
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    20%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
+                    	if (productCount >= 20) break; // Only show 7 products per category
+                        productCount++;
+          
+                        
+                %>
             <div class="product-box">
                 <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product4.webp" alt="">
+                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/<%= product.getImage() %>" alt="">
                 </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
+                <p class="product-title" ><%= product.getName() %></p>
                 <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
+                    <span class="actual-price" >Rs: <%= product.getPrice() %></span><span class="discount-price"
+                        >Rs: 120</span>
                 </p>
                 <div style="margin: 15px 0px;" class="rating">
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -610,134 +156,28 @@
                 <div class="off">
                     5%off
                 </div>
-                <a href="./productDetail.html" class="buy-btn">
+                <a href="${pageContext.request.contextPath}/buy/?id=<%= product.getId() %>" class="buy-btn">
                     <span style="display: flex;justify-content: center;">Buy Now</span>
                 </a>
             </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product5.webp" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    5%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product1" alt="">
-                </picture>
-               
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    10%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product2" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    20%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product4.webp" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    5%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
+                              <%
+                    }
+                    }
+                    }
+                %>
         </section>
 
         <header class=".product-slide-header">
             <section class="todays-section">
                 <h1 class="title">This month</h1>
                 <div id="type">
-                    <p class="topic" >Best Selling Products</p>
+                    <p class="topic" >Best Selling Tables</p>
                     <div class="controls">
                         <p>
                            
 
                         </p>
-                        <a class="btn scroll-down " >View All</a>
+                       <%--<a class="btn scroll-down " >View All</a> --%> 
                     </div>
                   
                  
@@ -751,98 +191,26 @@
             <span class="left">&#10094;</span>
             <span class="right">&#10095;</span>
 		
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product1" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    5%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product2" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    10%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product3.jpg" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+          	 <%
+   
+                          if ( products != null) {
+                int productCount = 1;
+                    for (ProductModel product : products) {
+                    	 if (product.getCategoryID() == 1) {
                     
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    20%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
+                    	if (productCount >= 20) break; // Only show 7 products per category
+                        productCount++;
+          
+                        
+                %>
             <div class="product-box">
                 <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product4.webp" alt="">
+                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/<%= product.getImage() %>" alt="">
                 </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
+                <p class="product-title" ><%= product.getName() %></p>
                 <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
+                    <span class="actual-price" >Rs: <%= product.getPrice() %></span><span class="discount-price"
+                        >Rs: 120000</span>
                 </p>
                 <div style="margin: 15px 0px;" class="rating">
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -857,121 +225,15 @@
                 <div class="off">
                     5%off
                 </div>
-                <a href="./productDetail.html" class="buy-btn">
+                <a href="${pageContext.request.contextPath}/buy?id=<%= product.getId() %>" class="buy-btn">
                     <span style="display: flex;justify-content: center;">Buy Now</span>
                 </a>
             </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product5.webp" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    5%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product1" alt="">
-                </picture>
-               
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    10%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product2" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    20%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
-            <div class="product-box">
-                <picture>
-                    <img src="${pageContext.request.contextPath}/assets/metalmandu3/product/product4.webp" alt="">
-                </picture>
-                <p class="product-title" >HP OfficeJet Pro
-                    9015</p>
-                <p class="price" >
-                    <span class="actual-price" >Rs:10000</span><span class="discount-price"
-                        >Rs:120000</span>
-                </p>
-                <div style="margin: 15px 0px;" class="rating">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                </div>
-                <div class="icons">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                </div>
-                <div class="off">
-                    5%off
-                </div>
-                <a href="./productDetail.html" class="buy-btn">
-                    <span style="display: flex;justify-content: center;">Buy Now</span>
-                </a>
-            </div>
+                              <%
+                    }
+                    }
+                    }
+                %>
         </section>
 
         

@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
+<%@ page import="com.MetalMandu.models.CategoryModel" %>
+<%@ page import="com.MetalMandu.models.ProductModel" %>
+<%@ page import="com.MetalMandu.models.BrandModel" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.MetalMandu.models.ProductModel" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +25,7 @@
                 </div>
                 <div class="nav">
                     <ul class="nav-list">
+         
                         <li class="nav_item "><a href="${pageContext.request.contextPath}/" class="nav-link">Home</a></li>
                         <li class="nav_item_has_children nav_item">
                             <a class="nav-link scroll-down ">New <i class="fa fa-caret-down" aria-hidden="true"></i></a>
@@ -32,23 +37,51 @@
                                                     alt=""></span></h2>
                                     </div>
 
+ <%
+ List<CategoryModel> categories = (List<CategoryModel>) request.getAttribute("categories");
 
-                                    <li class="scroll-down"><a>Inkjet Printers</a></li>
-                                    <li class="scroll-down"><a>Laser Printers</a></li>
-                                    <li class="scroll-down"><a>Multifunction Printers</a></li>
-                                    <li class="scroll-down"><a>3D Printers</a></li>
-                                    <li class="scroll-down"><a>Portable Printers</a></li>
+   
+                          if ( categories != null) {
+                int categoryCount = 0;
+                    for (CategoryModel category : categories) {
+                    	 if (categoryCount <= 1 && categoryCount <= 4  ) {
+                    
+                    	if (categoryCount == 4) break; // Only show 7 products per category
+                        categoryCount++;
+          
+                        
+                %>
+                                    <li class="scroll-down"><a><%= category.getName() %></a></li>
+                                                         <%
+                    }
+                    }
+                    }
+                %>
                                 <div class="col-2">
                                     <div>
                                         <h2 style="color: #2D336B; display: flex;gap: 5px;">Most Sold<span style=""><img
                                                     style="width: 30px;" src="${pageContext.request.contextPath}/assets/icons/shopping.png"
                                                     alt=""></span></h2>
                                     </div>
-                                    <li class="scroll-down"><a class="scroll-down">Inkjet Printers</a></li>
-                                    <li class="scroll-down"><a class="scroll-down">Laser Printers</a></li>
-                                    <li class="scroll-down"><a class="scroll-down">Multifunction Printers</a></li>
-                                    <li class="scroll-down"><a class="scroll-down">3D Printers</a></li>
-                                    <li><a href="">Portable Printers</a></li>
+                                  <%
+
+   
+                          if ( categories != null) {
+                int categoryCount = 3;
+                    for (CategoryModel category : categories) {
+                    	 if (categoryCount <= 4 && categoryCount <= 5  ) {
+                    
+                    	if (categoryCount == 5) break; // Only show 7 products per category
+                        categoryCount++;
+          
+                        
+                %>
+                                    <li class="scroll-down"><a><%= category.getName() %></a></li>
+                                                         <%
+                    }
+                    }
+                    }
+                %>
                                 </div>
                                 <div class="col-3">
                                     <div>
@@ -56,11 +89,26 @@
                                                 style=""><img style="width: 30px;" src="${pageContext.request.contextPath}/assets/icons/cheap.png"
                                                     alt=""></span></h2>
                                     </div>
-                                    <li><a class="scroll-down">Inkjet Printers</a></li>
-                                    <li><a class="scroll-down">Laser Printers</a></li>
-                                    <li><a class="scroll-down">Multifunction Printers</a></li>
-                                    <li><a class="scroll-down">3D Printers</a></li>
-                                    <li><a class="scroll-down">Portable Printers</a></li>
+                                   <%
+
+   
+                          if ( categories != null) {
+                int categoryCount = 0;
+                    for (CategoryModel category : categories) {
+                    	 if (categoryCount <= 6 && categoryCount <= 7  ) {
+                    
+                    	if (categoryCount == 4) break; // Only show 7 products per category
+                        categoryCount++;
+          
+                        
+                %>
+                                    <li class="scroll-down"><a><%= category.getName() %></a></li>
+                                                         <%
+                    }
+                    }
+                    }
+                %>
+                            
                                 </div>
 
 
@@ -75,16 +123,26 @@
                             <a class="scroll-down nav-link" >Brand <i class="fa fa-caret-down" aria-hidden="true"></i></a>
 
                             <ul class="sub-menu single-column-menu">
-                                <li><a class="scroll-down">Canon</a></li>
-                                <li><a class="scroll-down">HP</a></li>
-                                <li><a class="scroll-down">Epson</a></li>
-                                <li><a class="scroll-down">Brother</a></li>
-                                <li><a class="scroll-down">Samsung</a></li>
-                                <li><a class="scroll-down">Dell</a></li>
+               <%
+                          List<BrandModel> brands = (List<BrandModel>) request.getAttribute("brands");
+
+                          if ( brands != null) {
+                int brandCount = 0;
+                    for (BrandModel brand : brands) {
+          
+                        	if (brandCount >= 7) break; // Only show 7 products per category
+                            brandCount++;
+                %>
+                                <li><a class="scroll-down"><%= brand.getName() %></a></li>
+
+                                          <%
+                    }
+                    }
+                %>
+                          
                             </ul>
                         </li>
-                        <li class="nav_item"><a href="./Research.html" class="nav-link">Research</a></li>
-                        <li class="nav_item"><a href="./blog.html" class="nav-link">Blog</a></li>
+       
                         <li class="nav_item"><a href="./Aboutus.html" class="nav-link">About Us</a></li>
                     </ul>
                     </ul>
@@ -92,11 +150,11 @@
 
                 </div>
                 <div class="icons">
-                    <form  class="search-bar" action="">
-                        <input placeholder="Search your product..." type="text">
-                       
-                        <i  class="fa fa-search" aria-hidden="true"></i>
-                    </form>
+                <form class="search-bar" action="${pageContext.request.contextPath}/header" method="get">
+                
+    <input type="text" name="q" placeholder="Search..." />
+   <i class="fa fa-search" aria-hidden="true"></i>
+</form>
 
 
 <% 
@@ -151,12 +209,91 @@
 
             </div>
         </div>
-        </div>
-
+      
         <div class="search-slide-down">
             Search:
-            <input class="input" placeholder="Search your product here..">
+            <i class="fa fa-search" aria-hidden="true"></i>
+   <form action="${pageContext.request.contextPath}/header" method="get">
+    <input type="text" class="input" name="q" placeholder="Search..." />
+    <button type="submit">Search</button>
+    <br>
+             <%
+    List<ProductModel> searchResults = (List<ProductModel>) request.getAttribute("searchResults");
+    String searchQuery = (String) request.getAttribute("searchQuery");
+    if (searchQuery != null && !searchQuery.isEmpty()) {
+%>
+    <h3>Search Results for "<%= searchQuery %>":</h3>
+    <% if (searchResults != null && !searchResults.isEmpty()) {
+        for (ProductModel product : searchResults) { %>
+            <div class="search-result-item">
+                <p><strong><%= product.getName() %></strong></p>
+                <p><%= product.getDescription() %></p>
+                <p>Price: $<%= product.getPrice() %></p>
+            </div>
+    <%  }
+       } else { %>
+        <p>No products found for "<%= searchQuery %>".</p>
+    <% } %>
+<% } %>
+</form>
+    <br>
+    
+  
+             
+   
+
+
+
+        
+ 
         </div>
+         <div class="search-drop-down" id="searchDropDown"
+     style="position: relative; padding-bottom: 8px; <%= (searchQuery != null && !searchQuery.isEmpty()) ? "display: block;" : "display: none;" %>">
+
+    <button onclick="document.getElementById('searchDropDown').style.display='none'"
+            style="position: fixed; top: 80px; right: 60px; background: transparent; border: none; font-size: 50px; cursor: pointer;">
+        &times;
+    </button>
+
+    <%
+    if (searchQuery != null && !searchQuery.isEmpty()) {
+    %>
+        <div class="container">
+            <h3 style="font-size: 25px; margin-bottom: 20px; color: #2D336B;">
+                Search Results for "<%= searchQuery %>":
+            </h3>
+        </div>
+        <% if (searchResults != null && !searchResults.isEmpty()) {
+            for (ProductModel product : searchResults) { %>
+                <div class="container">
+                    <div style="padding: 12px; border-bottom: 1px solid #eee;overflow-y:auto; margin-bottom: 8px;display:flex; gap:50px;align-items:center;">
+                                        <img style="max-width:50px;" src="${pageContext.request.contextPath}/assets/metalmandu3/product/<%= product.getImage() %>" alt="">
+                    
+                        <p style="margin: 0; font-size: 14px; color: #444;">
+                           <a style="margin: 0; font-size: 14px; color: #444; cursor:pointer;"  href="${pageContext.request.contextPath}/buy/?id=<%= product.getId() %>"><strong><%= product.getName() %></strong></a> 
+                           <br>
+                           Price:<%= product.getPrice() %>
+                           <br>
+                           Description:<%= product.getDescription() %>
+                                                   <br>
+                        <a style="margin: 0; font-size: 14px;text-decoration:underline; color: #444; cursor:pointer;"  href="${pageContext.request.contextPath}/buy/?id=<%= product.getId() %>">View Product</a>
+                        </p>
+
+                        
+                    </div>
+                </div>
+        <%  }
+        } else { %>
+            <div class="container">
+                <p style="font-size: 16px;margin-bottom: 20px; color: #666;">No products found for "<%= searchQuery %>".</p>
+            </div>
+        <% } %>
+    <% } %>
+
+</div>
+
+        
+      
 
     </header>
    
@@ -193,8 +330,7 @@
                          <li><a>Decor</a></li>
                     </ul>
                 </li>
-                <li class="nav_item_has_children nav_item"><a href="./Research.html" class="nav-link ">Research</a></li>
-                <li class="nav_item_has_children nav_item"><a href="./blog.html" class="nav-link">Blog</a></li>
+         
                 <li class="nav_item"><a href="./Aboutus.html" class="nav-link">About Us</a></li>
             </ul>
             </ul>

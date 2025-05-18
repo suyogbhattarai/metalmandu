@@ -29,6 +29,21 @@ public class ProductModel {
         this.categoryID = categoryID;
         this.brandID = brandID;
     }
+    
+    public ProductModel( String name, String description, double price, int stockQuantity,
+            String material, String dimensions, String image,
+            int categoryID, int brandID) {
+
+this.name = name;
+this.description = description;
+this.price = price;
+this.stockQuantity = stockQuantity;
+this.material = material;
+this.dimensions = dimensions;
+this.image = image;
+this.categoryID = categoryID;
+this.brandID = brandID;
+}
 
     // Getters & Setters
     public int getId() { return id; }

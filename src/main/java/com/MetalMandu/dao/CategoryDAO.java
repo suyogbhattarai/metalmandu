@@ -15,14 +15,14 @@ public class CategoryDAO {
      * @param limit Maximum number of categories to retrieve
      * @return List of categories
      */
-    public List<CategoryModel> getTopCategories(int limit) {
+    public List<CategoryModel> getTopCategories() {
         List<CategoryModel> categories = new ArrayList<>();
-        String query = "SELECT id, name, description FROM categories LIMIT ?";
+        String query = "SELECT id, name, description FROM categories";
         
         try (Connection conn = DbConnection.getDbConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {	
             
-            pstmt.setInt(1, limit);
+          
             
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {

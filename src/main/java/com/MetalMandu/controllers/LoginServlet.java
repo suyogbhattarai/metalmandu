@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 
 	        // Set role cookie and redirect
 	        if (authenticatedUser.isAdmin()) {
-	            CookieUtil.addCookie(resp, "role", "admin", 5 * 30);
+	            CookieUtil.addCookie(resp, "role", "admin", 5 * 24 * 60 * 60);
 	            resp.sendRedirect(req.getContextPath() + "/dashboard");
 	        } else {
 	            CookieUtil.addCookie(resp, "role", "user", 5 * 30);

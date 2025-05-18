@@ -15,7 +15,7 @@ public class CategoryService {
      * Retrieves the first 7 categories from the database
      * @return List of up to 7 categories
      */
-    public List<CategoryModel> getTopCategories(int items ) {
-        return categoryDAO.getTopCategories(items);
+    public List<CategoryModel> getTopCategories( ) {
+        return categoryDAO.getTopCategories();
     }
 }

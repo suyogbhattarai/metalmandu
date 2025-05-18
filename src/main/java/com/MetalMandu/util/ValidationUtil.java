@@ -22,6 +22,15 @@ public class ValidationUtil {
     public static boolean isAlphanumericStartingWithLetter(String value) {
         return value != null && value.matches("^[a-zA-Z][a-zA-Z0-9]*$");
     }
+    
+    public static boolean isValidPrice(String value) {
+        return value != null && value.matches("^\\d+(\\.\\d{1,2})?$");
+    }
+    
+    public static boolean isValidStockNumber(String value) {
+        return value != null && value.matches("^\\d+$");
+    }
+
 
     // 4. Validate if a string is "male" or "female" (case insensitive)
     public static boolean isValidGender(String value) {
@@ -50,8 +59,14 @@ public class ValidationUtil {
         if (imagePart == null || isNullOrEmpty(imagePart.getSubmittedFileName())) {
             return false;
         }
+        
         String fileName = imagePart.getSubmittedFileName().toLowerCase();
-        return fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif");
+        return fileName.endsWith(".jpg") || 
+               fileName.endsWith(".jpeg") || 
+               fileName.endsWith(".png") || 
+               fileName.endsWith(".gif") ||
+               fileName.endsWith(".svg") ||
+               fileName.endsWith(".webp");
     }
 
     // 9. Validate if password and retype password match

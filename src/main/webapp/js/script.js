@@ -10,6 +10,8 @@ const scroll_down = document.querySelector('.scroll-down')
 
 
 
+
+
 window.addEventListener("scroll", function () {
 
   let topButton = document.querySelector(".to-top-btn");
@@ -46,7 +48,7 @@ window.addEventListener("scroll", function () {
    let slidedown = document.querySelector(".slide-down-navbar");
  
    let scrollY = window.scrollY || window.pageYOffset;
-   if (scrollY > 200) {
+   if (scrollY > 500) {
      headerBar.classList.add("slide-down-navbar");
      headerBar.classList.remove("header-default");
    } else {

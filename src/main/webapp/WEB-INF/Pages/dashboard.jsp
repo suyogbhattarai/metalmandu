@@ -2,6 +2,8 @@
 <%@ page import="com.MetalMandu.models.CategoryModel" %>
 <%@ page import="com.MetalMandu.models.ProductModel" %>
 <%@ page import="com.MetalMandu.models.UserModel" %>
+<%@ page import="com.MetalMandu.models.BrandModel" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -20,106 +22,8 @@
     </head>
     <body>
         <!--========== HEADER ==========-->
-        <header class="header">
-            <div class="header__container">
-               
-                <img  src="${pageContext.request.contextPath}/assets/metalmandu3/png/logo-no-background.png" class="header__logo" alt="">
-
-    
-                <div class="header__search">
-                    <input type="search" placeholder="Search" class="header__input">
-                    <i class='bx bx-search header__icon'></i>
-                </div>
-    
-                <div class="header__toggle">
-                    <i class='bx bx-menu' id="header-toggle"></i>
-                </div>
-            </div>
-        </header>
-
-        <!--========== NAV ==========-->
-        <div class="nav" id="navbar">
-            <nav class="nav__container">
-                <div>
-                    <a href="#" class="nav__link nav__logo">
-                     
-                        <i style="font-size: 20px; margin-right: 10px;margin-top: 5px; color: #2D336B   ;" class="fa fa-bars" aria-hidden="true"></i>
-                        <img  class="nav__logo-name" src="${pageContext.request.contextPath}/assets/metalmandu3/png/logo-no-background.png" class="header__logo" alt="">
-                    </a>
-    
-                    <div class="nav__list">
-                        <div class="nav__items">
-                            <h3 class="nav__subtitle">Profile</h3>
-    
-                            <a href="#" class="nav__link active">
-                                <i class='bx bx-home nav__icon' ></i>
-                                <span class="nav__name">Home</span>
-                            </a>
-                            
-                            <div class="nav__dropdown">
-                                <a href="#" class="nav__link">
-                                    <i class='bx bx-user nav__icon' ></i>
-                                    <span class="nav__name">Profile</span>
-                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
-                                </a>
-
-                                <div class="nav__dropdown-collapse">
-                                    <div class="nav__dropdown-content">
-                                        <a href="#" class="nav__dropdown-item">Passwords</a>
-                                    
-                                        <a href="#" class="nav__dropdown-item">Accounts</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <a href="#" class="nav__link">
-                                <i class='bx bx-message-rounded nav__icon' ></i>
-                                <span class="nav__name">Messages</span>
-                            </a>
-                        </div>
-    
-                        <div class="nav__items">
-                            <h3 class="nav__subtitle">Menu</h3>
-    
-                            <div class="nav__dropdown">
-                                <a href="#" class="nav__link">
-                                   <i style="margin-right:6px;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    <span class="nav__name">Manage</span>
-                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
-                                </a>
-
-                                <div class="nav__dropdown-collapse">
-                                    <div class="nav__dropdown-content">
-                                        <a href="#" class="nav__dropdown-item">Products</a>
-                                        <a href="#" class="nav__dropdown-item">Categories</a>
-                                        <a href="#" class="nav__dropdown-item">Brand</a>
-                                        <a href="#" class="nav__dropdown-item">Users</a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                       
-                       
-                        </div>
-                    </div>
-                </div>
-
-                <div  class="nav__link nav__logout">
-                    <i class='bx bx-log-out nav__icon' ></i>
-                   	<form class="logoutForm" action="${pageContext.request.contextPath}/logout" method="post">
-							<input  type="submit" class="nav-button" value="Logout" />
-						</form>
-            
-                </div>
-            </nav>
-        </div>
-
-        <!--========== CONTENTS ==========-->
-
         
-    
-
+   <jsp:include page="dashboardHeader.jsp"/>
 
 
     <div class="main-content">
@@ -170,11 +74,19 @@
             </div>
             <div class="card-single">
               <div>
-                <h1>7</h1>
+              <%
+          // Use totalCategories instead of categoryCount to avoid duplicate variable
+          int totalBrands = 0;
+          if (request.getAttribute("brands") != null) {
+            List<BrandModel> allBrands = (List<BrandModel>) request.getAttribute("brands");
+            totalBrands = allBrands.size();
+          }
+        %>
+        <h1><%= totalBrands %></h1>
                 <span>Brands</span>
               </div>
               <div>
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <i class="fa fa-credit-card" aria-hidden="true"></i>
               </div>
             </div>
             <div class="card-single">
@@ -192,7 +104,7 @@
                 <span>Products</span>
               </div>
               <div>
-                <i class="fa fa-credit-card" aria-hidden="true"></i>
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </div>
             </div>
   
@@ -203,8 +115,8 @@
               <div class="card">
                 <div class="card-header">
                   <h2>Products</h2>
-                  <button>See all <i class="fa fa-arrow-right" style="margin-left:5px" aria-hidden="true"></i>
-                  </button>
+                 <a href="${pageContext.request.contextPath}/products"><button> See All<i class="fa fa-arrow-right" style="margin-left:5px" aria-hidden="true"></i>  </button></a> 
+                
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -230,10 +142,10 @@
                             productCount++;
                 %>
                           <tr>
-                            <td data-label="Account"><%= product.getName() %></td>
-                            <td data-label="Due Date"><%= product.getPrice() %></td>
-                            <td data-label="Amount"><%= product.getStockQuantity() %></td>
-                            <td data-label="Period"><%= product.getMaterial() %></td>
+                            <td data-label="Name"><%= product.getName() %></td>
+                            <td data-label="Price"><%= product.getPrice() %></td>
+                            <td data-label="Stock"><%= product.getStockQuantity() %></td>
+                            <td data-label="Material"><%= product.getMaterial() %></td>
                           </tr>
                           
                              <%
@@ -253,7 +165,7 @@
               <div class="card">
                 <div class="card-header">
                     <h2>Customers</h2>
-                    <button>See all <i class="fa fa-arrow-right" style="margin-left:5px" aria-hidden="true"></i>
+                 <a href="${pageContext.request.contextPath}/users"><button> See All<i class="fa fa-arrow-right" style="margin-left:5px" aria-hidden="true"></i>  </button></a> 
                     </button>
                 </div>
                 <div class="card-body">
@@ -289,7 +201,7 @@
                       </div>
                     </div>
                     <div class="contact">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                       <a href="${pageContext.request.contextPath}/users"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
 
 	                      </div>
                   </div>
@@ -308,8 +220,7 @@
             <div class="card">
               <div class="card-header">
                 <h2>Category</h2>
-                <button>See all <i class="fa fa-arrow-right" style="margin-left:5px" aria-hidden="true"></i>
- </button>
+
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -326,7 +237,7 @@
                        <%
                           List<CategoryModel> categories = (List<CategoryModel>) request.getAttribute("categories");
 
-                          if ( products != null) {
+                          if ( categories != null) {
                 int categoryCount = 0;
                     for (CategoryModel category : categories) {
           
@@ -349,10 +260,56 @@
               </div>
 
             </div>
+            
 
           </div>
+   <div class="projects">
+            <div class="card">
+              <div class="card-header">
+                <h2>Brand</h2>
+ 
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table>
+                
+                      <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Country</th>
+                      
+                        </tr>
+                      </thead>
+                      <tbody>
+                       <%
+                          List<BrandModel> brands = (List<BrandModel>) request.getAttribute("brands");
 
+                          if ( brands != null) {
+                int brandCount = 0;
+                    for (BrandModel brand : brands) {
           
+                        	if (brandCount >= 7) break; // Only show 7 products per category
+                            brandCount++;
+                %>
+                          <tr>
+                            <td data-label="Account"><%= brand.getName() %></td>
+                            <td data-label="Due Date"><%= brand.getOriginCountry() %></td>
+                 
+                          </tr>
+                          
+                             <%
+                    }
+                    }
+                %>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+
+            </div>
+            
+
+          </div>
   
         </main>
       </div>
@@ -361,6 +318,6 @@
      
 
         <!--========== MAIN JS ==========-->
-        <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+       
     </body>
 </html>

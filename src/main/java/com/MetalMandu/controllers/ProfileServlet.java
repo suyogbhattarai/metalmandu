@@ -22,7 +22,7 @@ public class ProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/Pages/profile.jsp").forward(request, response);
     }
-
+ 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -33,7 +33,7 @@ public class ProfileServlet extends HttpServlet {
         String address = request.getParameter("address");
 
         boolean hasError = false;
-
+        																																																																																		
         if ( !ValidationUtil.isAlphabetic(firstName)) {
             request.setAttribute("firstNameError", "First name should only have alphabetic letters");
             hasError = true;

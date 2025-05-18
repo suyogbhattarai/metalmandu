@@ -1,8 +1,11 @@
 package com.MetalMandu.controllers;
+import com.MetalMandu.service.BrandService;
 import com.MetalMandu.service.CategoryService;
 import com.MetalMandu.service.ProductService;
 
 import jakarta.servlet.ServletException;
+
+import com.MetalMandu.models.BrandModel;
 import com.MetalMandu.models.CategoryModel;
 import com.MetalMandu.models.ProductModel;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,10 +24,12 @@ public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	 private CategoryService categoryService;
 	   private ProductService productService;
+	   private BrandService brandService;
     public IndexServlet() {
         super();
         this.categoryService = new CategoryService();
         this.productService = new ProductService();
+        this.brandService = new BrandService();
     }
 
 	/**
@@ -32,8 +37,9 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// CORRECT: Forward to the index.jsp page (directly under webapp)
-		
-		List<CategoryModel> categories = categoryService.getTopCategories(7);
+		 List<BrandModel> brands = brandService.getAllBrand();
+		 request.setAttribute("brands", brands);
+		List<CategoryModel> categories = categoryService.getTopCategories();
 		 List<ProductModel> products = productService.getAllProducts();
 		
 		// Set categories as a request attribute
